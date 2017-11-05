@@ -1,11 +1,7 @@
-import * as PostActions from './post.actions'
+import * as PostActions from '../../actions/post.actions'
+import { Post } from "../../models/post";
 
 export type Action = PostActions.All;
-
-export interface Post {
-  text: string;
-  likes: number;
-};
 
 const defaultState: Post = {
   text: 'Hello. I am the default post',
