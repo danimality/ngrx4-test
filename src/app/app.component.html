@@ -1,9 +1,22 @@
 
-<div>
-  {{ message$ | async }}
-</div>
+<!--<div>-->
+  <!--{{ message$ | async }}-->
+<!--</div>-->
 
-<button (click)="spanishMessage()">Spanish</button>
-<button (click)="germanMessage()">German</button>
-<button (click)="frenchMessage()">French</button>
-<button (click)="englishMessage()">English</button>
+<!--<button (click)="spanishMessage()">Spanish</button>-->
+<!--<button (click)="germanMessage()">German</button>-->
+<!--<button (click)="frenchMessage()">French</button>-->
+<!--<button (click)="englishMessage()">English</button>-->
+
+
+<div *ngIf="post$ | async as post">
+  <h2>{{post.text}}</h2>
+  <h4>Votes: {{post.likes}}</h4>
+
+  <button (click)="upvote()">Upvote</button>
+  <button (click)="downvote()">Downvote</button>
+  <button (click)="resetPost()">Reset</button>
+
+  <input [(ngModel)]="text">
+  <button (click)="editText()"> Change title</button>
+</div>

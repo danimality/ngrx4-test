@@ -3,6 +3,10 @@ import { NgModule } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
 import { AppComponent } from './app.component';
 import { simpleReducer } from './simple.reducer';
+import { postReducer } from './post.reducer';
+import { FormsModule } from "@angular/forms";
+import { StoreDevtoolsModule } from "@ngrx/store-devtools";
+
 
 @NgModule({
   declarations: [
@@ -10,7 +14,13 @@ import { simpleReducer } from './simple.reducer';
   ],
   imports: [
     BrowserModule,
-    StoreModule.forRoot({message: simpleReducer})
+    FormsModule,
+    StoreModule.forRoot(
+      {post: postReducer }
+      ),
+    StoreDevtoolsModule.instrument({
+      maxAge: 20
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

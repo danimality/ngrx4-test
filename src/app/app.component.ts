@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs/Observable";
 
+import * as PostActions from './post.actions'
+import { Post } from "./post.reducer";
+
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,27 +13,46 @@ import { Observable } from "rxjs/Observable";
 })
 export class AppComponent {
 
-  message$: Observable<string>;
+  // message$: Observable<string>;
+
+  post$: Observable<Post>;
+  text: string;
 
   constructor(private store: Store<AppState>) {
-    this.message$ = this.store.select("message");
+    this.post$ = this.store.select("post");
   }
 
-  spanishMessage() {
-    this.store.dispatch({type: 'SPANISH'});
+  editText() {
+    this.store.dispatch(new PostActions.EditText(this.text));
   }
 
-  frenchMessage() {
-    this.store.dispatch({type: 'FRENCH'});
+  resetPost() {
+    this.store.dispatch(new PostActions.Reset());
   }
 
-  germanMessage() {
-    this.store.dispatch({type: 'GERMAN'});
+  upvote() {
+    this.store.dispatch(new PostActions.Upvote());
   }
 
-  englishMessage() {
-    this.store.dispatch({type: 'ENGLISH'});
+  downvote() {
+    this.store.dispatch(new PostActions.Downvote());
   }
+
+  // spanishMessage() {
+  //   this.store.dispatch({type: 'SPANISH'});
+  // }
+  //
+  // frenchMessage() {
+  //   this.store.dispatch({type: 'FRENCH'});
+  // }
+  //
+  // germanMessage() {
+  //   this.store.dispatch({type: 'GERMAN'});
+  // }
+  //
+  // englishMessage() {
+  //   this.store.dispatch({type: 'ENGLISH'});
+  // }
 
 }
 
@@ -37,5 +60,5 @@ export class AppComponent {
 
 
 interface AppState {
-  message: string;
+  post: Post;
 }
